@@ -11,15 +11,15 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer customerId;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
 
-    public Customer(Integer id, String firstName, String lastName, String email, String password) {
-        this.id = id;
+    public Customer(Integer customerId, String firstName, String lastName, String email, String password) {
+        this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

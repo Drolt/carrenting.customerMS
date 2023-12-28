@@ -28,4 +28,13 @@ public class CustomerService implements CustomerManager {
         return customerRepository.findAll();
     }
 
+    @Override
+    public  Customer updateCustomerEmail(Integer customerId String email, Customer newCustomerData) {
+        Customer customer = customerRepository.findByCustomerId(Integer customerId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCustomerById
+
 }
