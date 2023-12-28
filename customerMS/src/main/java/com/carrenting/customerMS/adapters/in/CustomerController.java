@@ -1,5 +1,7 @@
-package com.carrenting.customerMS;
+package com.carrenting.customerMS.adapters.in;
 
+import com.carrenting.customerMS.ports.data.Customer;
+import com.carrenting.customerMS.ports.in.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

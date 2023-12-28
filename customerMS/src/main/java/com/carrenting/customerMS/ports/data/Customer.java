@@ -1,20 +1,20 @@
-package com.carrenting.customerMS;
+package com.carrenting.customerMS.ports.data;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Customers")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(name = "FIRST_NAME")
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(name = "LAST_NAME")
+    @Column(nullable = false)
     private String lastName;
 
-    // Constructors, getters, and setters
+    // Getters and setters
 }
+
 
