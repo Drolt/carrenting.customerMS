@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -19,22 +18,35 @@ public class CustomerService implements CustomerManager {
     @Override
     @Transactional
     public Customer signUpCustomer(Customer customer) {
-        return CustomerRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional //(readOnly = true)-
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
     @Override
-    public  Customer updateCustomerEmail(Integer customerId String email, Customer newCustomerData) {
-        Customer customer = customerRepository.findByCustomerId(Integer customerId);
+    public  Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData) {
+        Customer customer = customerRepository.findByCustomerId(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer Id not found"));
+        customer.setEmail(newCustomerData.getEmail());
+        return customerRepository.save(customer);
+    }
+
+    @Override
+    public  Customer updateCustomerPassword(Integer customerId, String password, Customer newCustomerData) {
+        Customer customer = customerRepository.findByCustomerId(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer Id not found"));
+        customer.setPassword(newCustomerData.getPassword());
+        return customerRepository.save(customer);
     }
 
     @Override
     @Transactional
-    public void deleteCustomerById
+    public void deleteCustomerById(Integer customerId) {
+        customerRepository.deleteByCustomerId(customerId);
+    }
 
 }
