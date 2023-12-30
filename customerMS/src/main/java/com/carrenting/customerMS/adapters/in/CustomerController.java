@@ -1,30 +1,14 @@
 package com.carrenting.customerMS.adapters.in;
 
-import com.carrenting.customerMS.ports.data.Customer;
-import com.carrenting.customerMS.ports.in.CustomerManager;
-import com.carrenting.customerMS.ports.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/customer")
 public class CustomerController {
-    private final CustomerManager customerManager;
+    /*private final CustomerManager customerManager;
     @Autowired
     private CustomerService customerService;
-
-    @PostMapping("/signup")
-    public void signup(@RequestBody Customer customer) {
-        // Implement signup logic
-    }
-
-    @PostMapping("/login")
-    public void login(@RequestBody Customer customer) {
-        // Implement login logic
-    }
 
     @Autowired
     public CustomerController(CustomerManager customerManager) {
@@ -38,14 +22,14 @@ public class CustomerController {
         return ResponseEntity.ok(cars);
     }
     //GET: http://localhost:8080/api/cars/RRKHM777
-   /* @GetMapping("/{licensePlate}")
+    @GetMapping("/{licensePlate}")
     public ResponseEntity<Customer> getCar(@PathVariable String licensePlate) {
         Optional<Customer> customer = customerManager.getCustomer(licensePlate);
         return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }*/
+    }
 
 
-    /*//POST: http://localhost:8080/api/cars
+    //POST: http://localhost:8080/api/cars
     //JSON: {"licensePlate": "RRKHM777","mileage": 1400,"brand": "PEUGOT","model": "311"} or with carID -> "carID" : 1
     @PostMapping//JSON
     public ResponseEntity<Car> addCar(@RequestBody Car car) {

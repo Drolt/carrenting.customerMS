@@ -1,4 +1,4 @@
-package com.carrenting.customerMS.ports.service;
+package com.carrenting.customerMS.service;
 
 import com.carrenting.customerMS.ports.data.Customer;
 import com.carrenting.customerMS.ports.in.CustomerManager;
