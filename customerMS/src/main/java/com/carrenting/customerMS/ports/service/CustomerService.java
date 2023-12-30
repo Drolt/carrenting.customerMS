@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService implements CustomerManager {
@@ -19,6 +20,12 @@ public class CustomerService implements CustomerManager {
     @Transactional
     public Customer signUpCustomer(Customer customer) {
         return customerRepository.save(customer);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Customer> getCustomer(Integer customerId) {
+        return customerRepository.findByCustomerId(customerId);
     }
 
     @Override
