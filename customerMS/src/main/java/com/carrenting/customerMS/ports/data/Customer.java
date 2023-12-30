@@ -1,9 +1,8 @@
 package com.carrenting.customerMS.ports.data;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Setter
@@ -11,6 +10,7 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerId")
     private Integer customerId;
     private String firstName;
     private String lastName;
