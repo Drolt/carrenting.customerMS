@@ -35,7 +35,7 @@ public class CustomerService implements CustomerManager {
     }
 
     @Override
-    public  Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData) {
+    public Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData) {
         Customer customer = customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer Id not found"));
         customer.setEmail(newCustomerData.getEmail());
@@ -43,7 +43,7 @@ public class CustomerService implements CustomerManager {
     }
 
     @Override
-    public  Customer updateCustomerPassword(Integer customerId, String password, Customer newCustomerData) {
+    public Customer updateCustomerPassword(Integer customerId, String password, Customer newCustomerData) {
         Customer customer = customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer Id not found"));
         customer.setPassword(newCustomerData.getPassword());
