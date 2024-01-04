@@ -61,4 +61,14 @@ public class CustomerService implements CustomerManager {
         customerRepository.deleteByCustomerId(customerId);
     }
 
+    @Override
+    @Transactional
+    public void deleteCustomerByEmailAndPassword(String email, String password) {
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+        if (customer.isPresent() && customer.get().getPassword().equals(password)) {
+            customerRepository.delete(customer.get());
+        } else {
+            throw new RuntimeException("Invalid credentials provided");
+        }
+    }
 }

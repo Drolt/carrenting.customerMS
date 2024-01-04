@@ -14,4 +14,5 @@ public interface CustomerManager {
     Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData);
     Customer updateCustomerPassword(Integer customerId, String password, Customer newCustomerData);
     void deleteCustomerById(Integer customerId);
+    void deleteCustomerByEmailAndPassword(String email, String password);
 }
