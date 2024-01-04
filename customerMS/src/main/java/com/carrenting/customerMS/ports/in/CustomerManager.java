@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface CustomerManager {
 
     Customer signUpCustomer(Customer customer);
+    Optional<Customer> logInCustomer(String email, String password);
     Optional<Customer> getCustomer(Integer customerId);
     List<Customer> getAllCustomers();
     Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData);

@@ -23,6 +23,11 @@ public class CustomerService implements CustomerManager {
     }
 
     @Override
+    public Optional<Customer> logInCustomer(String email, String password) {
+        return customerRepository.findByEmailAndPassword(email, password);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<Customer> getCustomer(Integer customerId) {
         return customerRepository.findByCustomerId(customerId);

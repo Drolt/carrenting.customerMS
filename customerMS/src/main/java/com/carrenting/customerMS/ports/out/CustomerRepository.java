@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     void deleteByCustomerId(Integer customerId);
     Optional<Customer> findByCustomerId(Integer customerId);
+    Optional<Customer> findByEmailAndPassword(String email, String password);
 }
 
