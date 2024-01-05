@@ -28,16 +28,50 @@ public class CustomerController {
         Customer newCustomer = customerManager.signUpCustomer(customer);
         return ResponseEntity.ok(newCustomer);
     }
+
     @PostMapping("/login")
     public ResponseEntity<Customer> logInCustomer(@RequestBody Map<String, String> credentials) {
         Optional<Customer> customer = customerManager.logInCustomer(credentials.get("email"), credentials.get("password"));
         return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
+    @PutMapping("/update-email")
+    public ResponseEntity<?> updateCustomerEmail(@RequestBody Map<String, String> emailDetails) {
+        try {
+            customerManager.updateCustomerEmail(emailDetails.get("oldEmail"), emailDetails.get("newEmail"));
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changeCustomerPassword(@RequestBody Map<String, String> passwordDetails) {
+        try {
+            customerManager.changeCustomerPassword(passwordDetails.get("email"),
+                    passwordDetails.get("oldPassword"),
+                    passwordDetails.get("newPassword"));
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Integer customerId) {
         customerManager.deleteCustomerById(customerId);
-        return  ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteCustomerByEmailAndPassword(@RequestBody Map<String, String> credentials) {
+        try {
+            customerManager.deleteCustomerByEmailAndPassword(credentials.get("email"), credentials.get("password"));
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
 }

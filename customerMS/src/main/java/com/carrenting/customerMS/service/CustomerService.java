@@ -39,20 +39,20 @@ public class CustomerService implements CustomerManager {
         return customerRepository.findAll();
     }
 
-    @Override
-    public Customer updateCustomerEmail(Integer customerId, String eMail, Customer newCustomerData) {
-        Customer customer = customerRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer Id not found"));
-        customer.setEmail(newCustomerData.getEmail());
-        return customerRepository.save(customer);
+    public void updateCustomerEmail(String oldEmail, String newEmail) {
+        Customer customer = customerRepository.findByEmail(oldEmail).orElseThrow(() -> new RuntimeException("Customer with old email not found"));
+
+        customer.setEmail(newEmail);
+        customerRepository.save(customer);
     }
 
     @Override
-    public Customer updateCustomerPassword(Integer customerId, String password, Customer newCustomerData) {
-        Customer customer = customerRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer Id not found"));
-        customer.setPassword(newCustomerData.getPassword());
-        return customerRepository.save(customer);
+    @Transactional
+    public void changeCustomerPassword(String email, String oldPassword, String newPassword) {
+        Customer customer = customerRepository.findByEmailAndPassword(email, oldPassword).orElseThrow(() -> new RuntimeException("Invalid credentials"));
+
+        customer.setPassword(newPassword); // Make sure to encrypt the password if necessary
+        customerRepository.save(customer);
     }
 
     @Override
