@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class CustomerController {
 
     private final CustomerManager customerManager;
 
-    @Autowired
+    @Autowired // Autowiring the CustomerManager interface for dependency injection
     public CustomerController(CustomerManager customerManager) {
         this.customerManager = customerManager;
     }
@@ -33,6 +34,12 @@ public class CustomerController {
     public ResponseEntity<Customer> logInCustomer(@RequestBody Map<String, String> credentials) {
         Optional<Customer> customer = customerManager.logInCustomer(credentials.get("email"), credentials.get("password"));
         return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Customer>> getAllCustomers() {
+        List<Customer> customers = customerManager.getAllCustomers();
+        return ResponseEntity.ok(customers);
     }
 
     @PutMapping("/update-email")
