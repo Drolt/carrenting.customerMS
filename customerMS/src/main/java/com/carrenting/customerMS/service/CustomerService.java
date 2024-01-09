@@ -113,4 +113,9 @@ public class CustomerService implements CustomerManager {
         return reservationClient.getAvailableVehicle();
     }
 
+    @Override
+    public List<ReservationDto> getAllReservationsByUserID(int userID) {
+        return reservationClient.getAllReservationsByUserID(userID);
+    }
+
 }

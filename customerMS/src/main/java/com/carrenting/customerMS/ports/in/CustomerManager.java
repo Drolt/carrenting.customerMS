@@ -33,5 +33,6 @@ public interface CustomerManager {
     void deleteReservation(Long reservationId);
     List<ReservationDto> getReservationsForVehicle(@RequestParam("carID") int carID);
     List<CarDto> getAvailableVehicles();
+    List<ReservationDto> getAllReservationsByUserID(int userID);
 
 }

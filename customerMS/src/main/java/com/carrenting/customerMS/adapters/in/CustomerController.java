@@ -119,12 +119,22 @@ public class CustomerController {
         return ResponseEntity.ok(reservations);
     }
 
+    //Alle verfügbare Fahrzeuge
     //GET: http://localhost:8082/api/customer/reservation/availableVehicle
     @GetMapping("/reservation/availableVehicle")
     public ResponseEntity<List<CarDto>> getAvailableVehicle() {
         List<CarDto> carDtoList = customerManager.getAvailableVehicles();
         return ResponseEntity.ok(carDtoList);
     }
+
+    //Alee Fagrzeucge nach KundenID
+    //GET: http://localhost:8082/api/customer/reservation/user/1
+    @GetMapping("/reservation/user/{userID}")
+    public ResponseEntity<List<ReservationDto>> getAllReservationsByUserID(@PathVariable int userID){
+        List<ReservationDto> reservations = customerManager.getAllReservationsByUserID(userID);
+        return ResponseEntity.ok(reservations);
+    }
+
 
 }
 

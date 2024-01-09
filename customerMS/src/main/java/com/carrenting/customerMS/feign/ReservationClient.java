@@ -35,6 +35,13 @@ public interface ReservationClient {
     @GetMapping("/api/reservation/vehicle")
     List<ReservationDto> getReservationsForVehicle(@RequestParam("carID") int carID);
 
+    //Alle verfügbare Fahrzeuge
+    //GET: http://localhost:8082/api/customer/reservation/availableVehicle
     @GetMapping("/api/reservation/availableVehicle")
     List<CarDto> getAvailableVehicle();
+
+    //Alee Fagrzeucge nach KundenID
+    //GET: http://localhost:8082/api/customer/reservation/user/1
+    @GetMapping("/api/reservation/user/{userID}")
+    List<ReservationDto> getAllReservationsByUserID(@PathVariable int userID);
 }
