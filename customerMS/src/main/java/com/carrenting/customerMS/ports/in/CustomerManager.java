@@ -1,5 +1,6 @@
 package com.carrenting.customerMS.ports.in;
 
+import com.carrenting.customerMS.dto.CarDto;
 import com.carrenting.customerMS.dto.ReservationDto;
 import com.carrenting.customerMS.ports.data.Customer;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,5 +32,6 @@ public interface CustomerManager {
     ReservationDto addReservation(ReservationDto reservation);
     void deleteReservation(Long reservationId);
     List<ReservationDto> getReservationsForVehicle(@RequestParam("carID") int carID);
+    List<CarDto> getAvailableVehicles();
 
 }

@@ -1,5 +1,6 @@
 package com.carrenting.customerMS.service;
 
+import com.carrenting.customerMS.dto.CarDto;
 import com.carrenting.customerMS.dto.ReservationDto;
 import com.carrenting.customerMS.feign.ReservationClient;
 import com.carrenting.customerMS.ports.data.Customer;
@@ -105,6 +106,11 @@ public class CustomerService implements CustomerManager {
 
     public List<ReservationDto> getReservationsForVehicle(int carID) {
         return reservationClient.getReservationsForVehicle(carID);
+    }
+
+    @Override
+    public List<CarDto> getAvailableVehicles() {
+        return reservationClient.getAvailableVehicle();
     }
 
 }

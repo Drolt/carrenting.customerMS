@@ -1,5 +1,6 @@
 package com.carrenting.customerMS.adapters.in;
 
+import com.carrenting.customerMS.dto.CarDto;
 import com.carrenting.customerMS.dto.ReservationDto;
 import com.carrenting.customerMS.ports.data.Customer;
 import com.carrenting.customerMS.ports.in.CustomerManager;
@@ -116,6 +117,13 @@ public class CustomerController {
     public ResponseEntity<List<ReservationDto>> getReservationsForVehicle(@RequestParam("carID") int carID) {
         List<ReservationDto> reservations = customerManager.getReservationsForVehicle(carID);
         return ResponseEntity.ok(reservations);
+    }
+
+    //GET: http://localhost:8082/api/customer/reservation/availableVehicle
+    @GetMapping("/reservation/availableVehicle")
+    public ResponseEntity<List<CarDto>> getAvailableVehicle() {
+        List<CarDto> carDtoList = customerManager.getAvailableVehicles();
+        return ResponseEntity.ok(carDtoList);
     }
 
 }
