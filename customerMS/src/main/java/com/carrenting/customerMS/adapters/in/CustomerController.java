@@ -1,5 +1,6 @@
 package com.carrenting.customerMS.adapters.in;
 
+import com.carrenting.customerMS.dto.ReservationDto;
 import com.carrenting.customerMS.ports.data.Customer;
 import com.carrenting.customerMS.ports.in.CustomerManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,42 @@ public class CustomerController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+    }
+
+
+
+    //======================================[Reservations]====================================================
+    //Alle Reservierungen anzeigen
+    //GET: http://localhost:8082/api/customer/reservation
+    @GetMapping("/reservation")
+    public ResponseEntity<List<ReservationDto>> getAllReservations() {
+        List<ReservationDto> reservations = customerManager.getAllReservations();
+        return ResponseEntity.ok(reservations);
+    }
+
+    //Neue Reservierung
+    //POST: http://localhost:8082/api/customer/reservation
+    //JSON:  {"reservationID": 16, "startDate": "2024-01-01T10:00:00", "endDate": "2024-01-07T15:00:00", "customerID": 1, "carID": 4 }
+    @PostMapping("/reservation")
+    public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservation) {
+        ReservationDto addReservation = customerManager.addReservation(reservation);
+        return ResponseEntity.ok(addReservation);
+    }
+
+    //Reservierung nach ID Loeschen
+    //DELETE: http://localhost:8082/api/customer/reservation/5
+    @DeleteMapping("/reservation/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+        customerManager.deleteReservation(id);
+        return ResponseEntity.ok().build();
+    }
+
+    //Reservierung fuer einen Fahrzeig nach CARID ansehen
+    // GET: http://localhost:8082/api/customer/reservation/vehicle?carID=3
+    @GetMapping("/reservation/vehicle")
+    public ResponseEntity<List<ReservationDto>> getReservationsForVehicle(@RequestParam("carID") int carID) {
+        List<ReservationDto> reservations = customerManager.getReservationsForVehicle(carID);
+        return ResponseEntity.ok(reservations);
     }
 
 }

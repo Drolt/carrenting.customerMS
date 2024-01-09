@@ -1,5 +1,7 @@
 package com.carrenting.customerMS.service;
 
+import com.carrenting.customerMS.dto.ReservationDto;
+import com.carrenting.customerMS.feign.ReservationClient;
 import com.carrenting.customerMS.ports.data.Customer;
 import com.carrenting.customerMS.ports.in.CustomerManager;
 import com.carrenting.customerMS.ports.out.CustomerRepository;
@@ -13,8 +15,18 @@ import java.util.Optional;
 @Service
 public class CustomerService implements CustomerManager {
 
-    @Autowired
+
     private CustomerRepository customerRepository;
+    private ReservationClient reservationClient;
+
+
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository,
+                           ReservationClient reservationClient){
+        this.customerRepository = customerRepository;
+        this.reservationClient = reservationClient;
+    }
+
 
     @Override
     @Transactional
@@ -71,4 +83,28 @@ public class CustomerService implements CustomerManager {
             throw new RuntimeException("Invalid credentials provided");
         }
     }
+
+
+
+    //======================================[Reservations]====================================================
+    @Override
+    public List<ReservationDto> getAllReservations() {
+        return reservationClient.getAllReservations();
+    }
+
+
+    @Override
+    public ReservationDto addReservation(ReservationDto reservation) {
+        return reservationClient.addReservation(reservation);
+    }
+
+    @Override
+    public void deleteReservation(Long reservationId) {
+        reservationClient.deleteReservation(reservationId);
+    }
+
+    public List<ReservationDto> getReservationsForVehicle(int carID) {
+        return reservationClient.getReservationsForVehicle(carID);
+    }
+
 }
