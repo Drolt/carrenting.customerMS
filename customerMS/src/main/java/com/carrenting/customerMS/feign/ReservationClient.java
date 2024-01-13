@@ -3,12 +3,11 @@ package com.carrenting.customerMS.feign;
 import com.carrenting.customerMS.dto.CarDto;
 import com.carrenting.customerMS.dto.ReservationDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "reservation-service", url = "http://localhost:8083")
+@FeignClient(name = "reservation-service", url = "http://reservation:8083")
 public interface ReservationClient {
 
     //Alle Reservierungen anzeigen
